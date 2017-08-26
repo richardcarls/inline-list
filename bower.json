@@ -1,0 +1,35 @@
+{
+  "name": "inline-list",
+  "description": "A custom element for a simple inline list.",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "list"
+  ],
+  "authors": [
+    "Richard Carls <richard.j.carls@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richardcarls/inline-list"
+  },
+  "main": "inline-list.html",
+  "ignore": [
+    ".*",
+    "bower_components",
+    "demo",
+    "test"
+  ],
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

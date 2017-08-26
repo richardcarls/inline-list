@@ -1,0 +1,80 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="inline-list">
+  <template>
+    <style>
+      #items-slot::slotted(*) {
+        display: inline;
+      }
+    </style>
+
+    <span id="list">
+      <slot id="items-slot"></slot>
+    </span>
+  </template>
+
+  <script>
+    /**
+     * `inline-list`
+     * An inline list.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class InlineList extends Polymer.Element {
+
+      static get is() { return 'inline-list'; }
+
+      static get properties() {
+        return {
+          delimiter: {
+            type: String,
+            notify: true,
+            value: ','
+          },
+          items: {
+            type: Array,
+            notify: true,
+            readOnly: true
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        const slot = this.$['items-slot'];
+        slot.addEventListener('slotchange', this._itemsChanged);
+
+        Polymer.Async.idlePeriod.run(() => {
+          this._itemsChanged();
+        });
+
+        this.addEventListener('delimiter-changed', this._itemsChanged);
+      }
+
+      _itemsChanged(e) {
+        const slot = this.$['items-slot'];
+        const items = slot.assignedNodes().filter(function(item) {
+          return item.nodeType === Node.ELEMENT_NODE;
+        });;
+
+        this._setItems(items);
+
+        if (!items.length) { return; }
+
+        items[0].previousSibling.nodeValue = '\n';
+        items.forEach((item, index) => {
+          item.nextSibling.nodeValue = '\n';
+
+          if (index !== items.length - 1) {
+            item.nextSibling.nodeValue = this.delimiter + '\n';
+          }
+        });
+      }
+    }
+
+    window.customElements.define(InlineList.is, InlineList);
+  </script>
+</dom-module>
