@@ -21,7 +21,7 @@ A custom element for a simple inline list.
   <span>Eucrades</span>
   <span>Dernesto</span>
   <span>Quillduct</span>
-  </inline-list>
+</inline-list>
 ```
 
 ## Installation
